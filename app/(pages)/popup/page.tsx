@@ -55,7 +55,7 @@ const Popup = () => {
                     voiceInfo: config?.voiceInfo || {},
                 })
             })
-            chrome.runtime.sendMessage()
+            chrome.runtime.sendMessage({type: 'api', URL: config?.selfNotiAPI})
         }
 
         console.log(`chrome?.runtime`, chrome?.tabs)

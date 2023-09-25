@@ -3,8 +3,8 @@
     "name": "iPhoneOrder.2023",
     "description": "iPhoneOrder",
     "version": "1.0",
-    "permissions": ["ttsEngine","tts", "activeTab", "scripting", "contextMenus", "tabs","storage"],
-    "host_permissions": [ "https://*.apple.com.cn/*"],
+    "permissions": ["ttsEngine","tts", "activeTab", "scripting", "contextMenus", "tabs","storage", "background"],
+    "host_permissions": ["<all_urls>"],
     "icons": {
         "16": "icons/icon16.png",
         "48": "icons/icon48.png",

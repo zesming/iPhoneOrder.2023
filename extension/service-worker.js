@@ -43,20 +43,36 @@ chrome.action.onClicked.addListener(async tab => {
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     const {
-        data,  extensionId, voiceInfo
+        type, data, extensionId, voiceInfo, URL
     } = message || {}
-    const { text, times, lang, voiceName} = voiceInfo || {}
-    if((data == 'bellring') && extensionId &&  text && times){
-        let voiceOption = {}
-        if(lang && voiceName){
-            voiceOption = {
-                lang, voiceName
+
+    switch (type) {
+        case 'voiceMsg':
+            const { text, times, lang, voiceName} = voiceInfo || {}
+            if((data === 'bellring') && extensionId &&  text && times){
+                let voiceOption = {}
+                if(lang && voiceName){
+                    voiceOption = {
+                        lang, voiceName
+                    }
+                }
+                chrome.tts.speak(text, voiceOption);
+                // 播放N次
+                for(let s=1; s<times; s++){
+                    chrome.tts.speak(text, voiceOption, {'enqueue': true})
+                }
             }
-        }
-        chrome.tts.speak(text, voiceOption);
-        // 播放N次
-        for(let s=1; s<times; s++){
-            chrome.tts.speak(text, voiceOption, {'enqueue': true})
-        }
+            break
+        case 'api':
+            if (URL) {
+                console.log("开始请求自定义 API,", URL)
+                fetch(URL).then((res) => {
+                    console.log("请求 API 完成，res:", res.json())
+                })
+            }
+            break
+        default:
+            console.log('should not enter default case')
+            break
     }
 });
