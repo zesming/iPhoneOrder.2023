@@ -323,8 +323,6 @@ const checkoutSteps = async ({ step, x_aos_stk, stepInfo, iPhoneOrderConfig, noN
         const isSuccess = status == 200 || status == 302 || status == 301 || false
         if (isSuccess) {
             try {
-                let text = encodeURIComponent(`抢到了！！！快去付钱\r\n账号：${iPhoneOrderConfig.appleId || ''}`)
-                // TODO send message by API
                 await playSystemNotification({ voiceInfo: iPhoneOrderConfig.voiceInfo })
                 await sendSelfNotificatioin({ url: iPhoneOrderConfig.selfNotiAPI })
             } catch (e) {

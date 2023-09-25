@@ -9,7 +9,7 @@ const playSystemNotification = async ({ voiceInfo }: { voiceInfo: VOICE_OBJ }) =
     let extensionId
     if (typeof chrome !== 'undefined' && chrome?.runtime) {
         extensionId = chrome.runtime.id
-        chrome.runtime.sendMessage({ data: 'bellring', extensionId, voiceInfo })
+        chrome.runtime.sendMessage({ type: 'voiceMsg', data: 'bellring', extensionId: extensionId, voiceInfo: voiceInfo })
     }
 
     // 检查浏览器是否支持 Web Notifications API
